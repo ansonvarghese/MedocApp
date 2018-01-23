@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "95625126546",
+    "firebase_url": "https://hospitalmanagementzibbix.firebaseio.com",
+    "project_id": "hospitalmanagementzibbix",
+    "storage_bucket": "hospitalmanagementzibbix.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95625126546:android:1327af6ba9b93452",
+        "android_client_info": {
+          "package_name": "com.zibbix.hospital.hospitalmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95625126546-mknd386k9voq4c1g1riiv3rc8g2gjqj9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zibbix.hospital.hospitalmanagement",
+            "certificate_hash": "7094fac00a8a720cbe460af014554f3f43b7fd57"
+          }
+        },
+        {
+          "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGrdsiOJrECVHZKnYnPqK7U4cESa3nTcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95625126546:android:2fb11253adb0df82",
+        "android_client_info": {
+          "package_name": "com.zibbix.docapp.docapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGrdsiOJrECVHZKnYnPqK7U4cESa3nTcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

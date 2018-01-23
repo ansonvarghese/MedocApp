@@ -1,0 +1,231 @@
+{
+  "project_info": {
+    "project_number": "95625126546",
+    "firebase_url": "https://hospitalmanagementzibbix.firebaseio.com",
+    "project_id": "hospitalmanagementzibbix",
+    "storage_bucket": "hospitalmanagementzibbix.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95625126546:android:1327af6ba9b93452",
+        "android_client_info": {
+          "package_name": "com.zibbix.hospital.hospitalmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95625126546-mknd386k9voq4c1g1riiv3rc8g2gjqj9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zibbix.hospital.hospitalmanagement",
+            "certificate_hash": "7094fac00a8a720cbe460af014554f3f43b7fd57"
+          }
+        },
+        {
+          "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGrdsiOJrECVHZKnYnPqK7U4cESa3nTcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95625126546:android:d5c157b22e226ea5",
+        "android_client_info": {
+          "package_name": "com.zibbix.jmk.medicivedocapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95625126546-c4tbki71pfk3t01glgjphql1gu3vlvmc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zibbix.jmk.medicivedocapp",
+            "certificate_hash": "3ab4d4d4ee7d233378f660211393bdf79b689ff2"
+          }
+        },
+        {
+          "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGrdsiOJrECVHZKnYnPqK7U4cESa3nTcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95625126546:android:8e98e6c2ad4617ed",
+        "android_client_info": {
+          "package_name": "com.zibbix.docapp.medicivedocapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95625126546-vvtefi9mk2aqgck43b0ffc48g60f5l2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zibbix.docapp.medicivedocapp",
+            "certificate_hash": "3ab4d4d4ee7d233378f660211393bdf79b689ff2"
+          }
+        },
+        {
+          "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGrdsiOJrECVHZKnYnPqK7U4cESa3nTcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95625126546:android:3c6c608a3032fe82",
+        "android_client_info": {
+          "package_name": "com.zibbix.hospital.MediciveDocApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95625126546-qtbc69o5ekgfqt74h5c76s92m0kbk3g4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zibbix.hospital.MediciveDocApp",
+            "certificate_hash": "3ab4d4d4ee7d233378f660211393bdf79b689ff2"
+          }
+        },
+        {
+          "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGrdsiOJrECVHZKnYnPqK7U4cESa3nTcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95625126546:android:2fb11253adb0df82",
+        "android_client_info": {
+          "package_name": "com.zibbix.docapp.docapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95625126546-78chgo171qf742sboqvcmfhkq6a8tr95.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zibbix.docapp.docapp",
+            "certificate_hash": "3ab4d4d4ee7d233378f660211393bdf79b689ff2"
+          }
+        },
+        {
+          "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGrdsiOJrECVHZKnYnPqK7U4cESa3nTcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95625126546-9s9lnqaoftpfpu2o5oa0252fktpg5dqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/prof"
+            android:icon="@drawable/prof"
+            android:title="Profile" />
+        <item
+            android:id="@+id/appointments"
+            android:icon="@drawable/app"
+            android:title="Appointments" />
+        <item
+            android:id="@+id/patientinfo"
+            android:icon="@drawable/info"
+            android:title="PatientInfo" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/lg"
+            android:title="LogOut" />
+    </group>
+
+</menu>
