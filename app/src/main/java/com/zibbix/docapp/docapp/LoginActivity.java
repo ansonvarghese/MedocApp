@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignup,txt;
+    private TextView textViewSignup,forgot;
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
@@ -75,14 +75,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
         textViewSignup  = (TextView) findViewById(R.id.textViewSignUp);
-        txt  = (TextView) findViewById(R.id.textView3);
+        forgot  = (TextView) findViewById(R.id.forgot);
         ((ShowHidePasswordEditText) findViewById(R.id.editTextPassword)).setTintColor(Color.RED);
         progressDialog = new ProgressDialog(this);
 
         //attaching click listener
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
-        txt.setOnClickListener(this);
+        forgot.setOnClickListener(this);
     }
 
     //method for user login
@@ -140,6 +140,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        if(view == forgot) {
+
+            startActivity(new Intent(this, ResetPasswordActivity.class));
+
+        }
         if(view == buttonSignIn){
             userLogin();
         }
@@ -148,11 +153,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "Contact Management!", Toast.LENGTH_LONG).show();
             //startActivity(new Intent(this, RegisterActivity.class));
         }
-        if(view==txt)
+
+        /*if(view==txt)
         {
             Intent intent=new Intent(this,MainActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
 
     public final boolean isInternetOn() {

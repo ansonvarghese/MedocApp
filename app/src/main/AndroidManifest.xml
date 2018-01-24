@@ -26,8 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
-
+        <activity android:name=".ResetPasswordActivity"/>
         <activity android:name=".MainActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Booking"></activity>
     </application>
 </manifest>

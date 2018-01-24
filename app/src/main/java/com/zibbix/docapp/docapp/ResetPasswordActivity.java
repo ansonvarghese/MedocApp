@@ -1,4 +1,4 @@
-package com.zibbix.hospital.MediciveDocApp;
+package com.zibbix.docapp.docapp;
 
 /**
  * Created by anoop on 15/1/18.
