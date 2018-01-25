@@ -179,6 +179,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.patientinfo) {
 
+            startActivity(new Intent(this, Patient_Activity.class));
+
         } else if (id == R.id.logout) {
             firebaseAuth.signOut();
             //closing activity
