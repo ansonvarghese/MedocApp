@@ -1,37 +1,38 @@
 package com.zibbix.docapp.docapp;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.DatePicker;
-import android.widget.TextView;
+import android.view.Window;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String currentdate,fromdate,todate,dateformat;
-    Calendar myCalendar = Calendar.getInstance(Locale.getDefault());
-    TextView edittext;
-    @SuppressLint("SimpleDateFormat")
 
 
     private FirebaseAuth firebaseAuth;
@@ -39,82 +40,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //booking
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar cal = Calendar.getInstance();
-        currentdate = dateFormat1.format(cal.getTime());
-        fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
-        todate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
-
-//edit
-        edittext = (TextView) findViewById(R.id.dateid);
-        edittext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar mcurrentDate=Calendar.getInstance();
-                int mYear=mcurrentDate.get(Calendar.YEAR);
-                int mMonth=mcurrentDate.get(Calendar.MONTH);
-                int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-
-                DatePickerDialog mDatePicker=new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-// TODO Auto-generated method stub
-                        String selectedPJPDate=String.valueOf(selectedyear)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedday);
-
-// String selectedPJPDate=String.valueOf(selectedday)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedyear);
-                        try {
-                            Calendar cals = Calendar.getInstance();
-                            cals.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(selectedPJPDate));
-//pjpSelectedDate = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
-                            fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cals.getTime());
-
-                            dateformat=new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
-
-                        }
-                        catch (ParseException p)
-                        {
-                            p.printStackTrace();
-                        }
-
-                        edittext.setText(dateformat);
-                    }
-                },mYear, mMonth, mDay);
-                mDatePicker.setTitle("Select date");
-                mDatePicker.show();
-            }
-        });
-
-
-
-
-
-
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-// TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                updateLabel();
-
-            }
-        };
-
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -176,11 +104,53 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.prof) {
 
         } else if (id == R.id.appointments) {
+            Intent intent=new Intent(this,AppointActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         } else if (id == R.id.patientinfo) {
 
-            startActivity(new Intent(this, Patient_Activity.class));
+            final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+            Calendar cal = Calendar.getInstance();
+
+            final String currentdate = dateFormat1.format(cal.getTime());
+            final HashMap<String, String> appointhash = new HashMap<String, String>();
+            DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Doctors").child(currentFirebaseUser.getUid()).child("Appointment");
+            databaseRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (final DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
+
+                        if (Objects.equals(dSnapshot.getValue(), currentdate)) {
+                            DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Appointments").child(dSnapshot.getKey()).child("counter");
+                            databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot Snapshot) {
+                                    appointhash.put(Snapshot.getValue().toString(), dSnapshot.getKey());
+                                    Intent intent = new Intent(MainActivity.this,Patient_Activity.class);
+                                    intent.putExtra("appointhash", appointhash);
+                                    intent.putExtra("counter", 1);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         } else if (id == R.id.logout) {
             firebaseAuth.signOut();
             //closing activity
@@ -193,15 +163,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-
-    }
 }

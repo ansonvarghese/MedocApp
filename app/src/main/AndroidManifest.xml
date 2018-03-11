@@ -26,6 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
+        <activity android:name=".AppointActivity" />
+
         <activity android:name=".ResetPasswordActivity" />
         <activity
             android:name=".MainActivity"

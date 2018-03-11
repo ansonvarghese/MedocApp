@@ -1,9 +1,11 @@
 package com.zibbix.docapp.docapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,123 +17,78 @@ import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class Patient_Activity extends Activity {
     TextView tv;
     EditText et;
-    CheckBox cb;
-    Spinner sp,sp1;
+
     Button bt;
-    MultiAutoCompleteTextView MultipleValuesholdt,mv2;
-    String[] multi={"nachu","jmk","google","android"};
-    String[] MultipleTextStringValue = { "Android","Android-MultiAutoCompleteTextView","Android Top Tutorials" };
+
    //spinners
-    String Dept[]={"Gyno","Nuero","Mri"};
-    String m[]={"Dr.Arun","Dr.Binu","Dr.Sindhu"};
-    String b[]={"Dr.zim","Dr.Zam","Dr.zimba"};
-    String u[]={"Dr.Jimbru","Dr.fai","Dr.Fadhiya"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_);
-        bt=(Button)findViewById(R.id.button3);
-        tv=(TextView)findViewById(R.id.tv3);
-        et=(EditText)findViewById(R.id.editText);
-        cb=(CheckBox)findViewById(R.id.checkBox);
-        sp=(Spinner)findViewById(R.id.spinner);
-        sp1=(Spinner)findViewById(R.id.spinner2);
-        sp.setVisibility(View.GONE);
-        sp1.setVisibility(View.GONE);
+
+        Intent intent = getIntent();
+        HashMap<String, String> appointhash = (HashMap<String, String>)intent.getSerializableExtra("appointhash");
+        int counter = intent.getExtras().getInt("counter");
+
+        bt = (Button) findViewById(R.id.button3);
+        tv = (TextView) findViewById(R.id.tv3);
+        et = (EditText) findViewById(R.id.editText);
+        String[] words=new String[] {
+                "word1", "word2", "word3", "word4", "word5"
+        };
+
+        MultiAutoCompleteTextView symp = (MultiAutoCompleteTextView) this.findViewById(R.id.autoCompleteTextView);
+        ArrayAdapter<String> aaStr = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,words);
+        symp.setAdapter(aaStr);
+        symp.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer() );
 
 
-//
-        final ArrayAdapter<String> ia = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Dept);
+        String[] words1=new String[] {
+                "word1", "word2", "word3", "word4", "word5"
+        };
 
-        final ArrayAdapter<String> ma = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, m);
+        MultiAutoCompleteTextView pres = (MultiAutoCompleteTextView) this.findViewById(R.id.autoCompleteTextView2);
+        ArrayAdapter<String> aaStr1 = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,words1);
+        pres.setAdapter(aaStr1);
+        pres.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer() );
 
-        final ArrayAdapter<String> ba = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, b);
 
-        final ArrayAdapter<String> ua = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, u);
-
-        ia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(ia);
-
-        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        String appoint = appointhash.get(Integer.toString(counter));
+        DatabaseReference databaseRefappoint = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appoint).child("Patient Name");
+        databaseRefappoint.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                switch (parent.getId()) {
-                    case R.id.spinner: {
-                        if (Dept[position].equals("Gyno")) {
-
-                            ma.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            sp1.setAdapter(ma);
-
-                        }
-                        if (Dept[position].equals("Nuero")) {
-
-                            ba.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            sp1.setAdapter(ba);
-
-                        }
-                        if (Dept[position].equals("Mri")) {
-
-                            ua.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            sp1.setAdapter(ua);
-
-                        }
-
-                    }
-
-
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tv.setText(dataSnapshot.getValue().toString());
 
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
-mv2=(MultiAutoCompleteTextView)findViewById(R.id.autoCompleteTextView2);
-        ArrayAdapter<String> TopicName1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, multi);
-        mv2.setAdapter(TopicName1);
-        mv2.setThreshold(2);
-        mv2.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-            MultipleValuesholdt = (MultiAutoCompleteTextView)findViewById(R.id.autoCompleteTextView);
-            ArrayAdapter<String> TopicName = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MultipleTextStringValue);
-            MultipleValuesholdt.setAdapter(TopicName);
-            MultipleValuesholdt.setThreshold(2);
-            MultipleValuesholdt.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
-        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
+        bt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if ( isChecked )
-                {
-                    sp.setVisibility(View.VISIBLE);
-                    sp1.setVisibility(View.VISIBLE);
-                    // perform logic
-                }
-                else
-                {
-                    sp.setVisibility(View.INVISIBLE);
-                    sp1.setVisibility(View.INVISIBLE);
-                }
+            public void onClick(View v) {
 
             }
         });
-
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
 
 }
 

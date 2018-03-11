@@ -15,7 +15,7 @@
         <item
             android:id="@+id/patientinfo"
             android:icon="@drawable/info"
-            android:title="PatientInfo" />
+            android:title="Start Session" />
         <item
             android:id="@+id/logout"
             android:icon="@drawable/lg"
