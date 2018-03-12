@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +34,10 @@ public class Patient_Activity extends Activity {
     EditText et;
 
     Button bt;
+    final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
-   //spinners
+
+    //spinners
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,10 @@ public class Patient_Activity extends Activity {
         setContentView(R.layout.activity_patient_);
 
         Intent intent = getIntent();
-        HashMap<String, String> appointhash = (HashMap<String, String>)intent.getSerializableExtra("appointhash");
-        int counter = intent.getExtras().getInt("counter");
+        final HashMap<String, String> appointhash = (HashMap<String, String>)intent.getSerializableExtra("appointhash");
+        final int counter = intent.getExtras().getInt("counter");
+        DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(currentFirebaseUser.getUid());
+        databaseRefDoc.child("counter").setValue(counter);
 
         bt = (Button) findViewById(R.id.button3);
         tv = (TextView) findViewById(R.id.tv3);
@@ -51,7 +57,7 @@ public class Patient_Activity extends Activity {
                 "word1", "word2", "word3", "word4", "word5"
         };
 
-        MultiAutoCompleteTextView symp = (MultiAutoCompleteTextView) this.findViewById(R.id.autoCompleteTextView);
+        final MultiAutoCompleteTextView symp = (MultiAutoCompleteTextView) this.findViewById(R.id.autoCompleteTextView);
         ArrayAdapter<String> aaStr = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,words);
         symp.setAdapter(aaStr);
         symp.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer() );
@@ -61,13 +67,13 @@ public class Patient_Activity extends Activity {
                 "word1", "word2", "word3", "word4", "word5"
         };
 
-        MultiAutoCompleteTextView pres = (MultiAutoCompleteTextView) this.findViewById(R.id.autoCompleteTextView2);
+        final MultiAutoCompleteTextView pres = this.findViewById(R.id.autoCompleteTextView2);
         ArrayAdapter<String> aaStr1 = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,words1);
         pres.setAdapter(aaStr1);
         pres.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer() );
 
 
-        String appoint = appointhash.get(Integer.toString(counter));
+        final String appoint = appointhash.get(Integer.toString(counter));
         DatabaseReference databaseRefappoint = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appoint).child("Patient Name");
         databaseRefappoint.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -85,7 +91,27 @@ public class Patient_Activity extends Activity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseReference databaseRefConsult = FirebaseDatabase.getInstance().getReference().child("Consultation").child(appoint);
+                databaseRefConsult.child("Prescriptiton").setValue(pres.getText().toString());
+                databaseRefConsult.child("Symptoms").setValue(symp.getText().toString());
+                databaseRefConsult.child("Patient Name").setValue(tv.getText());
+                DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(currentFirebaseUser.getUid());
+                databaseRefDoc.child("counter").child(Integer.toString(counter));
 
+
+                if(counter == appointhash.size()){
+                    Intent intent = new Intent(Patient_Activity.this,OverActivity.class);
+                    intent.putExtra("counter", counter+1);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(Patient_Activity.this,Patient_Activity.class);
+                    intent.putExtra("appointhash", appointhash);
+                    intent.putExtra("counter", counter+1);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
             }
         });
     }

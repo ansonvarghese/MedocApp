@@ -26,14 +26,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".AppointActivity" />
-
+        <activity android:name=".AppointActivity"
+            android:noHistory="true"
+            />
         <activity android:name=".ResetPasswordActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Booking" />
-        <activity android:name=".Patient_Activity"></activity>
+        <activity android:name=".Booking"
+            android:noHistory="true"
+            />
+        <activity android:name=".Patient_Activity"
+            android:noHistory="true"
+            />
+        <activity android:name=".OverActivity"
+            android:noHistory="true"
+            />
     </application>
 
 </manifest>
